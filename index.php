@@ -19,7 +19,7 @@
     <div class="ad-paner">
     </div>
 
-
+    <!-- if there is old Purchases print it  -->
     <!-- if there is old Purchases print it  -->
     <?php
     if (isset($_COOKIE['pastPurchases']) && (!empty($_COOKIE['pastPurchases']))) {
