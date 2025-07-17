@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address and Payment</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+
+<header class="top-header">
+    <div class="headr-logo"><img src="imges/logo.png" alt="Company Logo"></div>
+    <nav class="text-nav" aria-label="Main Navigation">
+        <label>Computers</label>
+        <label>Furnitures</label>
+        <label>Accessories</label>
+    </nav>
+    <div class="search">
+        <input type="search" placeholder="Search anything..." aria-label="Search products">
+        <img src="imges/search.webp" alt="Search Icon">
+    </div>
+    <nav class="icon-nav" aria-label="User and support icons">
+        <img class="header-icon" src="imges/Homeicon.webp" alt="Home Icon">
+        <img class="header-icon" style="width: 32px; position: relative; top: 4px;" src="imges/carticon.webp" alt="Shopping Cart Icon">
+        <img class="header-icon" src="imges/usericon.webp" alt="User Icon">
+        <img class="header-icon" src="imges/supporticon.webp" alt="Support Icon">
+    </nav>
+</header>
+
+<div class="container">
+    <h2>Checkout - Address & Payment</h2>
+    
+    <!-- Address Section -->
+    <div class="section">
+        <h3>Shipping Address</h3>
+        <form aria-labelledby="shipping-form">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="e.g. Khalid Alghamdi" required aria-required="true">
+
+            <label for="address">Street Address</label>
+            <input type="text" id="address" placeholder="e.g. Rakkah" required aria-required="true">
+
+            <label for="city">City</label>
+            <input type="text" id="city" placeholder="e.g. Khobar" required aria-required="true">
+
+            <label for="zip">ZIP Code</label>
+            <input type="text" id="zip" placeholder="e.g.90001" required aria-required="true">
+
+            <label for="country">Country</label>
+            <select id="country" required aria-required="true">
+                <option value="">Select</option>
+                <option value="Saudi Arabia">Saudi Arabia</option>
+                <option value="Kuwait">Kuwait</option>
+                <option value="Qatar">Qatar</option>
+            </select>
+        </form>
+    </div>
+
+    <!-- Payment Section -->
+    <div class="section">
+        <h3>Payment Details</h3>
+        <form aria-labelledby="payment-form">
+            <label for="card-name">Cardholder Name</label>
+            <input type="text" id="card-name" placeholder="e.g. Khalid Alghamdi" required aria-required="true">
+
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" placeholder="** ** ** **" required aria-required="true">
+
+            <label for="exp">Expiration Date</label>
+            <input type="month" id="exp" required aria-required="true">
+
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="123" required aria-required="true">
+        </form>
+    </div>
+
+    <button class="checkout-btn" aria-label="Confirm and make payment">Confirm & Pay</button>
+</div>
+
+
+</body>
+</html>

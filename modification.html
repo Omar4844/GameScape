@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Manage Products</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Extra styling for admin functionality */
+        .admin-container {
+            width: 90%;
+            margin: 2rem auto;
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid #3DBDA7;
+        }
+
+        .admin-container h2 {
+            color: #3DBDA7;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .admin-form input, .admin-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #2a2a2a;
+            color: white;
+        }
+
+        .admin-form .btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .admin-table {
+            margin-top: 2rem;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-table th, .admin-table td {
+            border: 1px solid #3DBDA7;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .admin-table th {
+            background-color: #067D71;
+            color: #F5F5F5;
+        }
+
+        .admin-table td button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h2>Manage Products</h2>
+
+        <form class="admin-form" id="productForm">
+            <input type="hidden" id="productId" value="">
+            <input type="text" id="productName" placeholder="Product Name" required>
+            <input type="text" id="productBrand" placeholder="Brand" required>
+            <input type="number" id="productPrice" placeholder="Price" required>
+            <input type="text" id="productImage" placeholder="Image URL" required>
+            <button type="submit" class="btn">Add Product</button>
+        </form>
+
+        <table class="admin-table" id="productTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Product rows will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const form = document.getElementById('productForm');
+        const table = document.getElementById('productTable').querySelector('tbody');
+        let products = [];
+        let editIndex = null;
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('productName').value;
+            const brand = document.getElementById('productBrand').value;
+            const price = document.getElementById('productPrice').value;
+            const image = document.getElementById('productImage').value;
+
+            const product = { name, brand, price, image };
+
+            if (editIndex !== null) {
+                products[editIndex] = product;
+                editIndex = null;
+                form.querySelector('button').textContent = 'Add Product';
+            } else {
+                products.push(product);
+            }
+
+            form.reset();
+            renderTable();
+        });
+
+        function renderTable() {
+            table.innerHTML = '';
+            products.forEach((product, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.name}</td>
+                    <td>${product.brand}</td>
+                    <td>$${product.price}</td>
+                    <td><img src="${product.image}" alt="Image" style="width: 50px; border-radius: 5px;"></td>
+                    <td>
+                        <button class="btn btn--sm" onclick="editProduct(${index})">Edit</button>
+                        <button class="btn btn--sm" onclick="deleteProduct(${index})">Delete</button>
+                    </td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        function editProduct(index) {
+            const product = products[index];
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productBrand').value = product.brand;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productImage').value = product.image;
+            editIndex = index;
+            form.querySelector('button').textContent = 'Update Product';
+        }
+
+        function deleteProduct(index) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products.splice(index, 1);
+                renderTable();
+            }
+        }
+    </script>
+</body>
+</html>
